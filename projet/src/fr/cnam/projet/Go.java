@@ -17,8 +17,8 @@ import fr.cnam.projet.*;
    
  */
 public class Go
+//commentaire de test
 {
-	
   // La taille de la grille d'un jeu de morpion
   final private static int NB_LIGNE=19;
   final private static int NB_COLONNE=19;
