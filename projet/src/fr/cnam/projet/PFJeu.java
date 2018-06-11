@@ -15,9 +15,9 @@ import fr.cnam.projet.*;
 //
 public class PFJeu
 {
-  private Othello  jeu;      // Le jeu (classe de modelisation du jeu)
+  //private Othello  jeu;      // Le jeu (classe de modelisation du jeu)
   //private Morpion  jeu;      // Le jeu (classe de modelisation du jeu)
-  //private Go  jeu;      // Le jeu (classe de modelisation du jeu)
+  private Go  jeu;      // Le jeu (classe de modelisation du jeu)
 
   private IHMPFJeu ihm;      // Ihm de la plate-forme de jeu
 
@@ -51,15 +51,22 @@ public class PFJeu
   //
   public void initialiser()
   {
-    ihm.AR("Initialisation de la plate-forme de jeu :");
-      
+	  
+	  
+    ihm.AR("Initialisation de la plate-forme de jeu :");   
+    
+    //Récupération des noms des fichiers Parties et Joueurs   
+    //
+    String joueursTxt = ihm.form.getValeurChamp("SAISIR_JOUEURS");
+    String partiesTxt = ihm.form.getValeurChamp("SAISIR_PARTIES");
+    
     // Lecture du fichier des joueurs inscrits
     //
     ihm.AR("Lecture du fichier des joueurs inscrits");
-    String[] lignes = Terminal.lireFichierTexte("data/Joueurs.txt");
+    String[] lignes = Terminal.lireFichierTexte("data/"+joueursTxt);
     if (lignes == null) 
       {
-        ihm.AR("Impossible de lire le fichier data/Joueurs.txt");
+        ihm.AR("Impossible de lire le fichier data/"+partiesTxt);
       }
     else
       {
@@ -78,10 +85,10 @@ public class PFJeu
     // Lecture du fichier des parties jouees
     //
     ihm.AR("Lecture du fichier des partie jouees");
-    lignes = Terminal.lireFichierTexte("data/Parties.txt");
+    lignes = Terminal.lireFichierTexte("data/"+partiesTxt);
     if (lignes == null) 
       {
-        ihm.AR("Impossible de lire le fichier data/Parties.txt");
+        ihm.AR("Impossible de lire le fichier data/"+partiesTxt);
       }
     else
       {
@@ -286,9 +293,9 @@ public class PFJeu
       }
 
     // 
-    jeu = new Othello(this);
+    //jeu = new Othello(this);
     //jeu = new Morpion(this);
-    //jeu = new Go(this);
+    jeu = new Go(this);
     jeu.demarrer();
     
     ihm.AR("Partie demarree");

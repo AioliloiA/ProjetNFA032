@@ -48,30 +48,24 @@ public class IHMPFJeu extends AdaptaterControlesCanvasIHM implements FormulaireI
     form.addText("JOUEUR","Joueur",false,"");
     form.addText("ADVERSAIRE","Adversaire",false,"");
     form.addButton("TESTER","Tester");
+    // Création des champs qui permettent de d'importer les fichiers parties et joueurs
+    form.addText("SAISIR_PARTIES", "Fichier des parties", true, "Parties.txt");
+    form.addText("SAISIR_JOUEURS", "Fichier des joueurs", true, "Joueurs.txt");
+    form.addButton("IMPORT","Importer");
     form.setPosition(10,500);
     form.addZoneText("RESULTATS","Resultats",
                      true,
                      "",
                      500,250);
+    
+    
 
     grille = null;  // La grille est cree par le jeu (ex: Othello)
-
 
     // Affichage du formulaire
     //
     form.afficher();
     
-    // Initialisation de l'applicatif
-    //  On affiche le resultat de l'initialisation
-    //
-    pfjeu.initialiser();
-
-    // On initialise la liste des joueurs
-    //
-    ArrayList<Joueur> joueurs = pfjeu.getJoueurs();
-    String[] tab = new String[joueurs.size()];
-    for(int i=0;i<tab.length;i++) tab[i]=joueurs.get(i).getIdent();
-    form.setListData("ADVERSAIRES",tab);
   }
 
 
@@ -153,6 +147,24 @@ public class IHMPFJeu extends AdaptaterControlesCanvasIHM implements FormulaireI
       {
         pfjeu.tester();
       }
+    
+    // Pour importer les données du fichire Joueurs.txt
+    if (nomSubmit.equals("IMPORT"))
+    {
+    	
+        
+        // Initialisation de l'applicatif
+        //  On affiche le resultat de l'initialisation
+        //
+        pfjeu.initialiser();
+
+        // On initialise la liste des joueurs
+        //
+        ArrayList<Joueur> joueurs = pfjeu.getJoueurs();
+        String[] tab = new String[joueurs.size()];
+        for(int i=0;i<tab.length;i++) tab[i]=joueurs.get(i).getIdent();
+        form.setListData("ADVERSAIRES",tab);
+    }
   }
 
   // Methode appellee quand on clique dans une case de la grille

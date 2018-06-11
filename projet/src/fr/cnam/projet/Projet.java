@@ -16,7 +16,7 @@ public class Projet
   public static void main(String a_args[])
   {
     // A cause du firewall present en salle de TP
-    System.setSecurityManager(new SecurityManager());
+    //System.setSecurityManager(new SecurityManager());
 
     // Les ports utilises
     //
