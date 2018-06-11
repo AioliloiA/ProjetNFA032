@@ -123,7 +123,7 @@ public class Go
 
   // Methode qui cree la partie du jeu d'othello
   //
-  public Partie getPartie(int numeroPartie,
+  public PartieGo getPartie(int numeroPartie,
                           String identJoueurCourant,
                           String identAdversaire)
   {
@@ -142,7 +142,7 @@ public class Go
     else {joueur1Gagne=true;joueur2Gagne=true;}//egalite
       
     // Creation de la partie
-    Partie p = new Partie(numeroPartie,
+    PartieGo p = new PartieGo(numeroPartie,
                           identJoueurCourant,
                           identAdversaire,
                           date,
@@ -150,7 +150,6 @@ public class Go
                           true,
                           joueur1Gagne,
                           joueur2Gagne,
-                          0,0,
                           nbPionsPrisJoueur1,
                           nbPionsPrisJoueur2,
                           0,0);

@@ -22,7 +22,7 @@ public class PFJeu
   private IHMPFJeu ihm;      // Ihm de la plate-forme de jeu
 
   private ArrayList<Joueur> joueurs;  // La collection des joueurs
-  private ArrayList<Partie> parties;  // La collection des parties jouees
+  private ArrayList<AbstractPartie> parties;  // La collection des parties jouees
 
   private String identJoueurCourant;  // L'identification du joueur courant
   private String identAdversaire;     // L'identification du joueur adverse
@@ -37,7 +37,7 @@ public class PFJeu
   public PFJeu(int portServeur,int portLocal,int portRemote)
   {
     joueurs = new ArrayList<Joueur>();
-    parties = new ArrayList<Partie>();
+    parties = new ArrayList<AbstractPartie>();
     identJoueurCourant = "";
     identAdversaire = "";
     this.portServeur = portServeur;
@@ -66,7 +66,7 @@ public class PFJeu
     String[] lignes = Terminal.lireFichierTexte("data/"+joueursTxt);
     if (lignes == null) 
       {
-        ihm.AR("Impossible de lire le fichier data/"+partiesTxt);
+        ihm.AR("Impossible de lire le fichier data/"+joueursTxt);
       }
     else
       {
@@ -102,7 +102,7 @@ public class PFJeu
             String date             = champs[3];
             String nomJeu           = champs[4];
             int    termineeI         = Integer.parseInt(champs[5]);
-            boolean terminee        = termineeI==1?true:false;
+            boolean partieTerminee        = termineeI==1?true:false;
             int    joueur1GagneI    = Integer.parseInt(champs[6]);
             boolean joueur1Gagne    = joueur1GagneI==1?true:false;
             int    joueur2GagneI    = Integer.parseInt(champs[7]);
@@ -114,21 +114,44 @@ public class PFJeu
             int    nbCaseTerritoireJoueur1  = Integer.parseInt(champs[12]);
             int    nbCaseTerritoireJoueur2  = Integer.parseInt(champs[13]);
             
-            Partie partie = new Partie(numero,
-                                       identJoueur1,
-                                       identJoueur2,
-                                       date,
-                                       nomJeu,
-                                       terminee,
-                                       joueur1Gagne,
-                                       joueur2Gagne,
-                                       nbPionRetourneJoueur1,
-                                       nbPionRetourneJoueur2,
-                                       nbPionPrisJoueur1,
-                                       nbPionPrisJoueur2,
-                                       nbCaseTerritoireJoueur1,
-                                       nbCaseTerritoireJoueur2);
-            parties.add(partie);
+            
+            if ("morpion".equalsIgnoreCase(nomJeu)) 
+            	{ 
+            	PartieMorpion partie = 
+            	new PartieMorpion(numero, identJoueur1, identJoueur2, date, nomJeu, partieTerminee, joueur1Gagne, joueur2Gagne) {};
+            	parties.add(partie);
+            	}
+            
+            else if ("go".equalsIgnoreCase(nomJeu)) 
+            	{
+            	PartieGo partie = 
+            	new PartieGo(numero, identJoueur1, identJoueur2, date, nomJeu, partieTerminee, joueur1Gagne, joueur2Gagne,nbPionPrisJoueur1,nbPionPrisJoueur2,nbCaseTerritoireJoueur1,nbCaseTerritoireJoueur2) {};
+            	parties.add(partie);
+            	}
+            		
+            else if ("othello".equalsIgnoreCase(nomJeu))
+            	{
+            	PartieOthello partie = 
+        		new PartieOthello(numero, identJoueur1, identJoueur2, date, nomJeu, partieTerminee, joueur1Gagne, joueur2Gagne,nbPionRetourneJoueur1,nbPionRetourneJoueur2) {};
+        		parties.add(partie);
+            	}
+            
+            else continue;
+//            		//new AbstractPartie(numero,
+//                                       identJoueur1,
+//                                       identJoueur2,
+//                                       date,
+//                                       nomJeu,
+//                                       terminee,
+//                                       joueur1Gagne,
+//                                       joueur2Gagne,
+//                                       nbPionRetourneJoueur1,
+//                                       nbPionRetourneJoueur2,
+//                                       nbPionPrisJoueur1,
+//                                       nbPionPrisJoueur2,
+//                                       nbCaseTerritoireJoueur1,
+//                                       nbCaseTerritoireJoueur2);
+            
           }
       }
 
@@ -150,7 +173,7 @@ public class PFJeu
   public void listerToutesParties()
   {
     ihm.AR("");
-    for(Partie p : parties)
+    for(AbstractPartie p : parties)
       ihm.AR(p.toString());
   }
 
@@ -243,7 +266,7 @@ public class PFJeu
       }
     
     boolean ok=false;
-    for(Partie p : parties)
+    for(AbstractPartie p : parties)
       if ( (p.getIdentJoueur1().equals(identJoueurCourant)) ||
            (p.getIdentJoueur2().equals(identJoueurCourant)) )
         {
@@ -319,7 +342,7 @@ public class PFJeu
 
     // On memorise la partie jouee par les deux joueurs
     //
-    Partie p = jeu.getPartie(numeroPartie(),
+    AbstractPartie p = jeu.getPartie(numeroPartie(),
                              identJoueurCourant,
                              identAdversaire);
     parties.add(p);
@@ -362,7 +385,7 @@ public class PFJeu
   private int numeroPartie()
   {
     int max=0;
-    for(Partie p:parties)
+    for(AbstractPartie p:parties)
       if (p.getNumero()>max) max=p.getNumero();
     return max+1;
   }

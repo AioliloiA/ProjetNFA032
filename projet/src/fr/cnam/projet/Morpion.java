@@ -135,7 +135,7 @@ public class Morpion
 
   // Methode qui cree les parties du jeu d'othello
   //
-  public Partie getPartie(int numeroPartie,
+  public PartieMorpion getPartie(int numeroPartie,
                           String identJoueurCourant,
                           String identAdversaire)
   {
@@ -152,15 +152,14 @@ public class Morpion
         if (nbLignesRayesJoueur2==MAX_T) joueur2Gagne=true;
       }
 
-    Partie p = new Partie(numeroPartie,
+    PartieMorpion p = new PartieMorpion(numeroPartie,
                           identJoueurCourant,
                           identAdversaire,
                           date,
-                           "morpion",
+                          "morpion",
                           terminee,
                           joueur1Gagne,
-                          joueur2Gagne,
-                          0,0,0,0,0,0);
+                          joueur2Gagne);                          
     return p;
   }
   

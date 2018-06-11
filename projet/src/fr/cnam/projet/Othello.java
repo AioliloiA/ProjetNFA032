@@ -158,7 +158,7 @@ public class Othello
 
   // Methode qui cree et retourne la partie
   //
-  public Partie getPartie(int numeroPartie,
+  public PartieOthello getPartie(int numeroPartie,
                           String identJoueurCourant,
                           String identAdversaire)
   {
@@ -194,7 +194,7 @@ public class Othello
             joueur2Gagne = true;
           }
       }    
-    Partie p = new Partie(numeroPartie,
+    PartieOthello p = new PartieOthello(numeroPartie,
                           identJoueurCourant,
                           identAdversaire,
                           date,
@@ -203,8 +203,7 @@ public class Othello
                           joueur1Gagne,
                           joueur2Gagne,
                           nbPionsJoueur1,
-                          nbPionsJoueur2,
-                          0,0,0,0
+                          nbPionsJoueur2                         
                           );
     return p;
   }
