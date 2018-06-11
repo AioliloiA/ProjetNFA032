@@ -38,7 +38,7 @@ public class PartieGo extends AbstractPartie
 
   // Partie en chaine
   //
-  @Override
+  
   public String toString()
   {
     return String.format("%3d %-15s %-15s %-19s %10s %5s %5s %5s %2d %2d %2d %2d",

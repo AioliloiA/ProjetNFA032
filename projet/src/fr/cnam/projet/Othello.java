@@ -9,7 +9,7 @@ import fr.cnam.projet.*;
 /* Classe de definition du jeu d'othello
    Cette classe modelise les regles du jeu d'othello
 */
-public class Othello
+public class Othello implements Jeu
 {
   // La taille de la grille d'un jeu d'hotello
   final private static int NB_LIGNE=8;

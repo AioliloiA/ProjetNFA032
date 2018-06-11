@@ -17,7 +17,7 @@ public class PFJeu
 {
   //private Othello  jeu;      // Le jeu (classe de modelisation du jeu)
   //private Morpion  jeu;      // Le jeu (classe de modelisation du jeu)
-  private Go  jeu;      // Le jeu (classe de modelisation du jeu)
+  private Jeu  jeu;      // Le jeu (classe de modelisation du jeu)
 
   private IHMPFJeu ihm;      // Ihm de la plate-forme de jeu
 
@@ -295,7 +295,7 @@ public class PFJeu
   // Demarrer une partie
   //  et creation du jeu (qui cree la grille de jeu)
   //
-  public void demarrer()
+  public void demarrer(String jeuChoisi)
   {
     if ( (jeu!=null) && jeu.getDemarree())
       {
@@ -315,10 +315,16 @@ public class PFJeu
         return;
       }
 
-    // 
-    //jeu = new Othello(this);
-    //jeu = new Morpion(this);
-    jeu = new Go(this);
+    
+    // Choix du jeu en fonction du parametre de la méthode
+    //
+    if (jeuChoisi.equals("othello"))   		
+    		jeu = new Othello(this);
+    		   
+    else if (jeuChoisi.equalsIgnoreCase("morpion"))  	    
+            jeu = new Morpion(this);
+    	    
+    else 	jeu = new Go(this);
     jeu.demarrer();
     
     ihm.AR("Partie demarree");

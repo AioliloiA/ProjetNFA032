@@ -16,7 +16,7 @@ public class IHMPFJeu extends AdaptaterControlesCanvasIHM implements FormulaireI
   private PFJeu pfjeu;    // La plate forme de jeu
   CanvasIHM grille;       // La grille de jeu
   Formulaire form;        // Le formulaire de l'ihm principale
-
+  public final static String[] jeux = {"othello","morpion","go"}; // Liste des jeuw
   // Constructeur
   //
   public IHMPFJeu(PFJeu pfjeu)
@@ -34,8 +34,8 @@ public class IHMPFJeu extends AdaptaterControlesCanvasIHM implements FormulaireI
     //
     form.addButton("AFF_JOUEURS","Afficher tous les joueurs");
     form.addButton("AFF_PARTIES","Afficher toutes les parties");
-    form.addText("IDENT","Ident",true,"");
-    form.addText("MDP","Mot de passe",true,"");
+    form.addText("IDENT","Ident",true,"localhost");
+    form.addText("MDP","Mot de passe",true,"mdp");
     form.addButton("INSCRIRE","Inscrire");
     form.addButton("IDENTIFIER","Identifier");
     form.addButton("PARTIES_JOUEUR","Parties joueur courant");
@@ -52,6 +52,8 @@ public class IHMPFJeu extends AdaptaterControlesCanvasIHM implements FormulaireI
     form.addText("SAISIR_PARTIES", "Fichier des parties", true, "Parties.txt");
     form.addText("SAISIR_JOUEURS", "Fichier des joueurs", true, "Joueurs.txt");
     form.addButton("IMPORT","Importer");
+    
+    form.addListeChoix("LISTE_JEUX", "Choisissez un jeu",jeux, true, jeux[2]);
     form.setPosition(10,500);
     form.addZoneText("RESULTATS","Resultats",
                      true,
@@ -132,7 +134,8 @@ public class IHMPFJeu extends AdaptaterControlesCanvasIHM implements FormulaireI
     //
     if (nomSubmit.equals("DEMARRER"))
       {
-        pfjeu.demarrer();
+    	String jeuChoisi = form.getValeurChamp("LISTE_JEUX");
+        pfjeu.demarrer(jeuChoisi);
       }
 
     // Arreter la partie
@@ -165,6 +168,8 @@ public class IHMPFJeu extends AdaptaterControlesCanvasIHM implements FormulaireI
         for(int i=0;i<tab.length;i++) tab[i]=joueurs.get(i).getIdent();
         form.setListData("ADVERSAIRES",tab);
     }
+    
+    // Pour choisir un jeu dans la liste de jeux
   }
 
   // Methode appellee quand on clique dans une case de la grille

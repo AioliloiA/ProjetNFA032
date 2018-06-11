@@ -15,7 +15,7 @@ import fr.cnam.projet.*;
 
     On ne peut pas re-utiliser les lignes rayees.
  */
-public class Morpion
+public class Morpion implements Jeu
 {
   // La taille de la grille d'un jeu de morpion
   final private static int NB_LIGNE=40;

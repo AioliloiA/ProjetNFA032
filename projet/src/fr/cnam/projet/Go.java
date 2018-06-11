@@ -16,7 +16,7 @@ import fr.cnam.projet.*;
      de chaque joueur. Celui qui a le meilleur compte gagne.
    
  */
-public class Go
+public class Go implements Jeu
 //commentaire de test
 {
   // La taille de la grille d'un jeu de morpion
