@@ -192,7 +192,12 @@ public class IHMPFJeu extends AdaptaterControlesCanvasIHM implements FormulaireI
     if (nomSubmit.equals("CHARGER"))
     {
     	AR("bouton cherger cliqué IHM");
-      pfjeu.charger();
+      try {
+		pfjeu.charger();
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
     }
     
     // Pour choisir un jeu dans la liste de jeux

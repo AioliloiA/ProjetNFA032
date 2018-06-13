@@ -1,5 +1,6 @@
 package fr.cnam.projet;
 
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -49,6 +50,13 @@ public abstract class AbstractPartie
   
 
 
+public AbstractPartie() {
+	// TODO Auto-generated constructor stub
+}
+
+
+
+
 // Partie en chaine
   //
   public String toString()
@@ -82,8 +90,17 @@ public abstract class AbstractPartie
 
 
 
-	public void charger(String nomFichierBine) {
-		// TODO Auto-generated method stub
+	public void read(DataInputStream dis) throws Exception {
+		
+		numero = dis.readInt();
+		identJoueur1 = dis.readUTF();
+		identJoueur2 = dis.readUTF();
+		date = dis.readUTF();
+		nomJeu = dis.readUTF();
+		partieTerminee = dis.readBoolean();
+		joueur1Gagne = dis.readBoolean();
+		joueur2Gagne = dis.readBoolean();
+		
 		
 	}
   

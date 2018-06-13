@@ -1,5 +1,6 @@
 package fr.cnam.projet;
 
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.util.*;
 
@@ -36,7 +37,11 @@ public class PartieOthello extends AbstractPartie
   // Partie en chaine
   //
   
-  public String toString()
+  public PartieOthello() {
+	// TODO Auto-generated constructor stub
+}
+
+public String toString()
   {
     return String.format("%3d %-15s %-15s %-19s %10s %5s %5s %5s %2d %2d  ",
     		getNumero(),
@@ -54,11 +59,22 @@ public class PartieOthello extends AbstractPartie
   }
   
   public void write(DataOutputStream dos) throws Exception {
-
+	  
+	  
+	  
 	  super.write(dos);
 	  dos.writeInt(nbPionRetourneJoueur1);
-	  dos.writeInt(nbPionRetourneJoueur1);
+	  dos.writeInt(nbPionRetourneJoueur2);
 	  
+	  
+  }
+  
+  public void read(DataInputStream dis) throws Exception {
+
+	  super.read(dis);
+	  nbPionRetourneJoueur1 = dis.readInt();
+	  nbPionRetourneJoueur2 = dis.readInt();
+	  System.out.println("Création partie Othello :"+this.toString());
   }
 
   // Getteurs

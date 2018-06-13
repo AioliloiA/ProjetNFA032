@@ -1,5 +1,6 @@
 package fr.cnam.projet;
 
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -30,7 +31,11 @@ public class PartieMorpion extends AbstractPartie
   // Partie en chaine
   //
   
-  public String toString()
+  public PartieMorpion() {
+	// TODO Auto-generated constructor stub
+}
+
+public String toString()
   {
     return String.format("%3d %-15s %-15s %-19s %10s %5s %5s %5s ",
                          getNumero(),
@@ -47,6 +52,13 @@ public class PartieMorpion extends AbstractPartie
   public void write(DataOutputStream dos) throws Exception {
 
 	  super.write(dos);
+	  
+	  
+  }
+  
+  public void read(DataInputStream dis) throws Exception {
+
+	  super.read(dis);
 	  
   }
 

@@ -1,5 +1,6 @@
 package fr.cnam.projet;
 
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.util.*;
 
@@ -40,7 +41,11 @@ public class PartieGo extends AbstractPartie
   // Partie en chaine
   //
   
-  public String toString()
+  public PartieGo() {
+		// TODO Auto-generated constructor stub
+	}
+
+public String toString()
   {
     return String.format("%3d %-15s %-15s %-19s %10s %5s %5s %5s %2d %2d %2d %2d",
     		getNumero(),
@@ -66,6 +71,17 @@ public class PartieGo extends AbstractPartie
 	  dos.writeInt(nbPionPrisJoueur2);
 	  dos.writeInt(nbCaseTerritoireJoueur1);
 	  dos.writeInt(nbCaseTerritoireJoueur2);
+	  
+	  
+  }
+  
+  public void read(DataInputStream dis) throws Exception {
+
+	  super.read(dis);
+	  nbPionPrisJoueur1= dis.readInt();
+	  nbPionPrisJoueur2= dis.readInt();
+	  nbCaseTerritoireJoueur1= dis.readInt();
+	  nbCaseTerritoireJoueur1= dis.readInt();
 	  
   }
 

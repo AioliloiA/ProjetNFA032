@@ -1,6 +1,8 @@
 package fr.cnam.projet;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import java.text.*;
 import java.io.*;
 import java.net.*;
@@ -43,6 +45,7 @@ public class PFJeu
     this.portServeur = portServeur;
     this.portLocal = portLocal;
     this.portRemote = portRemote;
+    
   }
 
   // Initialisation de la plate-forme de jeu.
@@ -399,16 +402,93 @@ public class PFJeu
   public void sauvegarder() throws Exception {
 	  ihm.AR("bouton save cliqué PFJEU");
 	  DataOutputStream dos = new DataOutputStream(new FileOutputStream(new File("data","PFJeu.bin")));
+	  
+	  dos.writeInt(joueurs.size());
+	  for (Joueur j:joueurs)
+	  {
+		  j.write(dos);
+	  }
+	  dos.writeInt(parties.size());
 	  for (AbstractPartie p:parties)
+	  {
+		  dos.writeUTF(p.getNomJeu());
 		  p.write(dos);
-	  ihm.AR(""+dos.size()+"\n"+dos.toString());
+	  }
+	  
 	  dos.close();
 	}
 
-  public void charger() {
-	  for (AbstractPartie p:parties)
-		  p.charger("data/PFJeu.bin");
+  
+
+public void charger() throws Exception {
+	 DataInputStream dis = new DataInputStream(new FileInputStream(new File("data","PFJeu.bin")));
+	 
+	 int nbJoueurs = dis.readInt();
+	 
+	 for (int i=0 ; i < nbJoueurs; i++ )
+	 {
+		 Joueur j = new Joueur();
+		 j.read(dis);
+		 joueurs.add(j);
+	 }
+	 
+	 int nbParties = dis.readInt();
+	 
+	 for (int i=0 ; i < nbParties; i++ )
+	 {	
+		 String nomPartie = dis.readUTF();
+		 ihm.AR(nomPartie);
+		 if (nomPartie.equals("othello"))
+		 {
+			 
+			 try {
+				PartieOthello pO = new PartieOthello();
+				 pO.read(dis);
+				 parties.add(pO);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			 
+		 }
+		 
+		 else if (nomPartie.equals("morpion"))
+		 {
+			 
+			 try {
+				PartieMorpion pM = new PartieMorpion();
+				 pM.read(dis);
+				 parties.add(pM);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			 
+		 }
+		 else if (nomPartie.equals("go") )
+		 {
+			 
+			 try {
+				PartieGo pG = new PartieGo();
+				 pG.read(dis);
+				 parties.add(pG);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			 
+		 }
+		 
+		 
+		 else System.out.println("Pas de jeu adequat");
 		
+		 
+	 }
+	
+	  
+		  
+	 
+	
 	}
 
   // Getteurs

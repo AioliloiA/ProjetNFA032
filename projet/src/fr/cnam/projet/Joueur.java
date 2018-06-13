@@ -1,5 +1,7 @@
 package fr.cnam.projet;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.util.*;
 
 // Classe de definition d'un joueur
@@ -18,15 +20,36 @@ public class Joueur
     this.mdp = mdp;
   }
 
-  // Joueur en chaine
+  public Joueur() {
+	// TODO Auto-generated constructor stub
+}
+
+// Joueur en chaine
   //
   public String toString()
   {
     return String.format("%-30s %-20s ",
                          ident,mdp);
   }
+  
+  public void write(DataOutputStream dos) throws Exception {
+		dos.writeUTF(ident);
+		dos.writeUTF(mdp);
+		
+	}
+  
+  public void read(DataInputStream dis) throws Exception {
+		
+	  ident = dis.readUTF();
+	  mdp = dis.readUTF();
+		
+	}
 
   // Getteurs
   public String getIdent(){return ident;}
   public String getMdp(){return mdp;}
+
+
+
+
 }
