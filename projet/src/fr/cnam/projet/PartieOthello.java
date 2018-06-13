@@ -1,5 +1,6 @@
 package fr.cnam.projet;
 
+import java.io.DataOutputStream;
 import java.util.*;
 
 // Classe de definition d'une partie
@@ -50,6 +51,14 @@ public class PartieOthello extends AbstractPartie
                          nbPionRetourneJoueur2);
 
 
+  }
+  
+  public void write(DataOutputStream dos) throws Exception {
+
+	  super.write(dos);
+	  dos.writeInt(nbPionRetourneJoueur1);
+	  dos.writeInt(nbPionRetourneJoueur1);
+	  
   }
 
   // Getteurs

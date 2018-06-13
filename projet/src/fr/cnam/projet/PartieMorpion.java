@@ -1,5 +1,8 @@
 package fr.cnam.projet;
 
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.*;
 
 // Classe de definition d'une partie
@@ -39,6 +42,12 @@ public class PartieMorpion extends AbstractPartie
                          isJoueur1Gagne(),
                          isJoueur2Gagne());
 
+  }
+  
+  public void write(DataOutputStream dos) throws Exception {
+
+	  super.write(dos);
+	  
   }
 
   // Getteurs

@@ -1,5 +1,7 @@
 package fr.cnam.projet;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.*;
 
 import fr.cnam.ihm.*;
@@ -52,6 +54,8 @@ public class IHMPFJeu extends AdaptaterControlesCanvasIHM implements FormulaireI
     form.addText("SAISIR_PARTIES", "Fichier des parties", true, "Parties.txt");
     form.addText("SAISIR_JOUEURS", "Fichier des joueurs", true, "Joueurs.txt");
     form.addButton("IMPORT","Importer");
+    form.addButton("SAUVEGARDER","Sauvegarder");
+    form.addButton("CHARGER","Charger");
     
     form.addListeChoix("LISTE_JEUX", "Choisissez un jeu",jeux, true, jeux[2]);
     form.setPosition(10,500);
@@ -167,6 +171,28 @@ public class IHMPFJeu extends AdaptaterControlesCanvasIHM implements FormulaireI
         String[] tab = new String[joueurs.size()];
         for(int i=0;i<tab.length;i++) tab[i]=joueurs.get(i).getIdent();
         form.setListData("ADVERSAIRES",tab);
+        
+        
+        
+    }
+    
+    if (nomSubmit.equals("SAUVEGARDER"))
+    {
+    	AR("bouton save cliqué IHM");
+    	System.out.println("methode pfjeu save");
+      try {
+    	
+		pfjeu.sauvegarder();
+	} catch (Exception e) {
+		System.out.println("Je n'ais pas pu sauvegarder");
+		e.printStackTrace();
+	}
+    }
+    
+    if (nomSubmit.equals("CHARGER"))
+    {
+    	AR("bouton cherger cliqué IHM");
+      pfjeu.charger();
     }
     
     // Pour choisir un jeu dans la liste de jeux

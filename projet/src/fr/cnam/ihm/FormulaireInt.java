@@ -1,5 +1,7 @@
 package fr.cnam.ihm;
 
+import java.io.FileNotFoundException;
+
 /** Interface d'utilisation d'un formulaire.<br>
     L'applicatif passer en paramètre du formulaire doit 
     implémenter cette interface. */
@@ -10,6 +12,7 @@ public interface FormulaireInt
         L'appel à form.setValeurChamp permet de changer les valeurs des champs.<br>
         @param form Le formulaire dans lequel se trouve le bouton
         @param nom Le nom du bouton qui a été utilisé.
+     
      */
-    public void     submit(Formulaire form,String nom);
+    public void     submit(Formulaire form,String nom) throws FileNotFoundException;
 }

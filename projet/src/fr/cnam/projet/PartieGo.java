@@ -1,5 +1,6 @@
 package fr.cnam.projet;
 
+import java.io.DataOutputStream;
 import java.util.*;
 
 // Classe de definition d'une partie
@@ -56,6 +57,16 @@ public class PartieGo extends AbstractPartie
                          nbCaseTerritoireJoueur2);
 
 
+  }
+  
+  public void write(DataOutputStream dos) throws Exception {
+
+	  super.write(dos);
+	  dos.writeInt(nbPionPrisJoueur1);
+	  dos.writeInt(nbPionPrisJoueur2);
+	  dos.writeInt(nbCaseTerritoireJoueur1);
+	  dos.writeInt(nbCaseTerritoireJoueur2);
+	  
   }
 
   // Getteurs

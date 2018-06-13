@@ -396,9 +396,25 @@ public class PFJeu
     return max+1;
   }
 
+  public void sauvegarder() throws Exception {
+	  ihm.AR("bouton save cliqué PFJEU");
+	  DataOutputStream dos = new DataOutputStream(new FileOutputStream(new File("data","PFJeu.bin")));
+	  for (AbstractPartie p:parties)
+		  p.write(dos);
+	  ihm.AR(""+dos.size()+"\n"+dos.toString());
+	  dos.close();
+	}
+
+  public void charger() {
+	  for (AbstractPartie p:parties)
+		  p.charger("data/PFJeu.bin");
+		
+	}
 
   // Getteurs
   public IHMPFJeu getIhm(){return ihm;}
   public void setIhm(IHMPFJeu ihm){this.ihm=ihm;}
   public ArrayList<Joueur> getJoueurs(){return joueurs;}
+
+
 }

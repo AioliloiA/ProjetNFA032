@@ -1,5 +1,10 @@
 package fr.cnam.projet;
 
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.*;
 
 // Classe de definition d'une partie
@@ -61,6 +66,27 @@ public abstract class AbstractPartie
 
   }
 
+  public void write(DataOutputStream dos) throws Exception {
+
+	  dos.writeInt(numero);
+	  dos.writeUTF(identJoueur1);
+	  dos.writeUTF(identJoueur2);
+	  dos.writeUTF(date);
+	  dos.writeUTF(nomJeu);
+	  dos.writeBoolean(partieTerminee);
+	  dos.writeBoolean(joueur1Gagne);
+	  dos.writeBoolean(joueur2Gagne);
+	  
+  }
+
+
+
+
+	public void charger(String nomFichierBine) {
+		// TODO Auto-generated method stub
+		
+	}
+  
   // Getteurs
   //
   public String getIdentJoueur1(){return identJoueur1;}
@@ -71,5 +97,10 @@ public abstract class AbstractPartie
   public boolean isPartieTerminee() {return partieTerminee;}
   public boolean isJoueur1Gagne() {return joueur1Gagne;}
   public boolean isJoueur2Gagne() {return joueur2Gagne;}
+
+
+
+
+
   
 }
