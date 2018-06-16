@@ -18,7 +18,7 @@ public class IHMPFJeu extends AdaptaterControlesCanvasIHM implements FormulaireI
   private PFJeu pfjeu;    // La plate forme de jeu
   CanvasIHM grille;       // La grille de jeu
   Formulaire form;        // Le formulaire de l'ihm principale
-  public final static String[] jeux = {"othello","morpion","go"}; // Liste des jeuw
+  public final static String[] jeux = {"othello","morpion","go", "puissance4"}; // Liste des jeuw
   // Constructeur
   //
   public IHMPFJeu(PFJeu pfjeu)
@@ -57,7 +57,7 @@ public class IHMPFJeu extends AdaptaterControlesCanvasIHM implements FormulaireI
     form.addButton("SAUVEGARDER","Sauvegarder");
     form.addButton("CHARGER","Charger");
     
-    form.addListeChoix("LISTE_JEUX", "Choisissez un jeu",jeux, true, jeux[2]);
+    form.addListeChoix("LISTE_JEUX", "Choisissez un jeu",jeux, true, jeux[3]);
     form.setPosition(10,500);
     form.addZoneText("RESULTATS","Resultats",
                      true,
@@ -194,6 +194,10 @@ public class IHMPFJeu extends AdaptaterControlesCanvasIHM implements FormulaireI
     	AR("bouton cherger cliqué IHM");
       try {
 		pfjeu.charger();
+		ArrayList<Joueur> joueurs = pfjeu.getJoueurs();
+        String[] tab = new String[joueurs.size()];
+        for(int i=0;i<tab.length;i++) tab[i]=joueurs.get(i).getIdent();
+        form.setListData("ADVERSAIRES",tab);
 	} catch (Exception e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();

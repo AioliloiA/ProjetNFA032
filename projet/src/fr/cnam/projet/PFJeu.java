@@ -139,6 +139,13 @@ public class PFJeu
         		parties.add(partie);
             	}
             
+            else if ("puissance4".equalsIgnoreCase(nomJeu)) 
+        	{ 
+        	PartiePuissanceQuatre partie = 
+        	new PartiePuissanceQuatre(numero, identJoueur1, identJoueur2, date, nomJeu, partieTerminee, joueur1Gagne, joueur2Gagne) {};
+        	parties.add(partie);
+        	}
+            
             else continue;
 //            		//new AbstractPartie(numero,
 //                                       identJoueur1,
@@ -327,7 +334,13 @@ public class PFJeu
     else if (jeuChoisi.equalsIgnoreCase("morpion"))  	    
             jeu = new Morpion(this);
     	    
-    else 	jeu = new Go(this);
+    else if (jeuChoisi.equalsIgnoreCase("go"))
+    		jeu = new Go(this);
+    
+    else if (jeuChoisi.equalsIgnoreCase("puissance4"))
+        	jeu = new PuissanceQuatre(this);
+    
+    
     jeu.demarrer();
     
     ihm.AR("Partie demarree");
@@ -478,9 +491,22 @@ public void charger() throws Exception {
 			}
 			 
 		 }
+			 else if (nomPartie.equals("puissance4") )
+			 {
+				 
+				 try {
+					PartiePuissanceQuatre p4 = new PartiePuissanceQuatre();
+					 p4.read(dis);
+					 parties.add(p4);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			 
+		 }
 		 
 		 
-		 else System.out.println("Pas de jeu adequat");
+		 
 		
 		 
 	 }
